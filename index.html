@@ -14,62 +14,62 @@
 	<script src="javascripts/index.js"></script>
 </head>
 <body ng-controller="salesController">
-	<div style="margin-bottom: -22px">
+	<div id="header">
 		<table class="table">
 			<thead>
-				<th class="info" style="width: 50%" ng-click="sortBy('name')">
+				<th class="info halfWidth" ng-click="sortBy('name')">
 					<a href="">Nume</a>
-					<span style="margin-left: 5px" ng-class="sortStyle('name')"></span>
+					<span id="sortButton1" ng-class="sortStyle('name')"></span>
 				</th>
-				<th class="info" style="width: 50%" ng-click="sortBy('genre')">
+				<th class="info halfWidth" ng-click="sortBy('genre')">
 					<a href="">Categorie</a>
-					<span style="margin-left: 5px"  ng-class="sortStyle('genre')"></span>
+					<span id="sortButton2" ng-class="sortStyle('genre')"></span>
 				</th>
 			</thead>
 		</table>
 	</div>
 
-	<div ng-show="shownPublications.length > 0" style="height: 86vh; overflow: auto">
+	<div id="body" ng-show="shownPublications.length > 0">
 		<table class="table">
-			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; p.magazine = true" ng-class="p.selected?'selected success':''">
-				<td style="width: 50%">
-					{{p.name}}
-					<div style="margin-top: 5px" ng-show="p.selected">
-						<img ng-show="p.selected && p.magazine" style="width: 18px; opacity: 0.5" src="images/ziar.png">
-						<img ng-show="p.selected && p.book" style="width: 16px; opacity: 0.5" src="images/book.png">
-						<img ng-show="p.selected && p.cd" style="width: 18px; opacity: 0.5" src="images/CD.png">
+			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; p.magazine = true"
+			ng-class="p.selected?'selected success':''">
+			<td class="halfWidth">
+				{{p.name}}
+				<div id="addonsContainer" ng-show="p.selected">
+					<img id="magazineImg" ng-show="p.selected && p.magazine" src="images/ziar.png">
+					<img id="bookImg" ng-show="p.selected && p.book" src="images/book.png">
+					<img id="cdImg" ng-show="p.selected && p.cd" src="images/CD.png">
+				</div>
+			</td>
+			<td class="text-muted">
+				<div id="leftChildRightTd">
+					<div>
+						{{p.genre}}
 					</div>
-				</td>
-				<td style="width: 50%; color: #9B9B9B">
-					<div style="float: left; width: 90%">
-						<div>
-							{{p.genre}}
-						</div>
-						<div style="margin-top: 10px" ng-show="p.selected">
-							<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
-								<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' ">
-								</span>
-							</button>
-						</div>
+					<div id="rightChildRightTd" ng-show="p.selected">
+						<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
+							<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' ">
+							</span>
+						</button>
 					</div>
-					<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
-					style="float: right; width: 10%; height: 70px; position: relative">
-					<div style="position: absolute; bottom: 0; right: 0">
-						<span style="font-size: 30px; color: green" class="glyphicon glyphicon-chevron-right"></span></div>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div ng-show="shownPublications == 0" style="width: 100%; height: 65vh; text-align: center">
-		<div style="font-weight: bold; color: red; margin-top: 20vh">0 rezultate gasite pentru "{{searchText}}"</div>
-	</div>
+				</div>
+				<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
+				id="openModalParent">
+				<div id="openModalChild">
+					<span id="finalizeOrder" class="text-success glyphicon glyphicon-chevron-right"></span></div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
 
-	<div class="form-group form-group-lg has-info has-feedback">
-		<div style="float: left; width: 100%">
-			<input type="text" class="form-control" placeholder="Cautare" ng-model="searchText" ng-change="filter(searchText)">
-			<i class="glyphicon glyphicon-search form-control-feedback"></i>
-		</div>
-	</div>
+<div id="noResultsWarningContainer" ng-show="shownPublications == 0">
+	<div id="noResultsWarning">0 rezultate gasite pentru "{{searchText}}"</div>
+</div>
+
+<div class="form-group form-group-lg has-info has-feedback">
+	<input type="text" class="form-control" placeholder="Cautare" ng-model="searchText" ng-change="filter(searchText)">
+	<i class="glyphicon glyphicon-search form-control-feedback"></i>
+</div>
 </body>
 </html>

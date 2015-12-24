@@ -1,3 +1,81 @@
+#header {
+    margin-bottom: -22px;
+}
+
+#body {
+    height: 86vh;
+    overflow: auto;
+}
+
+#finalizeOrder {
+    font-size: 30px;
+}
+
+#noResultsWarningContainer {
+    width: 100%;
+    height: 65vh;
+    text-align: center;
+}
+
+#noResultsWarning {
+    font-weight: bold;
+    color: red;
+    margin-top: 20vh;
+}
+
+#sortButton1, #sortButton2 {
+    margin-left: 5px;
+}
+
+#magazineImg {
+    width: 18px;
+    opacity: 0.5;
+}
+
+#bookImg {
+    width: 16px;
+    opacity: 0.5;
+}
+
+#cdImg {
+    width: 18px;
+    opacity: 0.5;
+}
+
+#addonsContainer {
+    margin-top: 5px;
+}
+
+#openModalParent {
+    float: right; 
+    width: 10%;
+    height: 70px;
+    position: relative;
+}
+
+#openModalChild {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#leftChildRightTd {
+    float: left;
+    width: 90%;
+}
+
+#rightChildRightTd {
+    margin-top: 10px
+}
+
+.halfWidth, #nameTd, #descTd {
+    width: 50%;
+}
+
+.halfOpacity {
+    opacity: 0.5;
+}
+
 .selected {
 	font-weight: bold;
 }
@@ -9,20 +87,20 @@
     letter-spacing: 1px;
     text-transform: uppercase;
 }
- 
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
 }
- 
+
 .btn-primary {
     background: #5CB85C;
     color: #ffffff;
 }
- 
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     background: #5CB85C;
 }
- 
+
 .btn-primary:active, .btn-primary.active {
     background: #3C763D;
     box-shadow: none;
