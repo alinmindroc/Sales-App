@@ -2,3 +2,7 @@
 	color: #008CCF;
 	background: #CDCDCD;
 }
+
+.selected {
+	font-weight: bold;
+}
