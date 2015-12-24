@@ -3,32 +3,32 @@
 }
 
 .btn {
-	padding: 10px 20px;
-	border: 0 none;
-	font-weight: 700;
-	letter-spacing: 1px;
-	text-transform: uppercase;
+    padding: 10px 20px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
-
+ 
 .btn:focus, .btn:active:focus, .btn.active:focus {
-	outline: 0 none;
+    outline: 0 none;
 }
-
+ 
 .btn-primary {
-	background: #5CB85C;
-	color: #ffffff;
+    background: #5CB85C;
+    color: #ffffff;
 }
-
+ 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-	background: #5CB85C;
+    background: #5CB85C;
 }
-
+ 
 .btn-primary:active, .btn-primary.active {
-	background: #3C763D;
-	box-shadow: none;
+    background: #3C763D;
+    box-shadow: none;
 }
 
 .btn-primary:active:hover, .btn-primary.active:hover {
-	background: #3C763D;
-	box-shadow: none;
+    background: #3C763D;
+    box-shadow: none;
 }

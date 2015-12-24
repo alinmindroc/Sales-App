@@ -57,7 +57,7 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 
 	$scope.open = function () {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'modalTemplate.html',
+			templateUrl: 'views/modalTemplate.html',
 			controller: 'ModalInstanceCtrl',
 			resolve: {
 				items: function () {
@@ -81,7 +81,7 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 	};
 
 	$scope.dynamicPopover = {
-		templateUrl: 'popoverTemplate.html',
+		templateUrl: 'views/popoverTemplate.html',
 	};
 }])
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
@@ -91,9 +91,9 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 		item = $scope.items[i];
 		if(item.magazine)
 			$scope.price += 5;
-		else if(item.book)
+		if(item.book)
 			$scope.price += 10;
-		else if(item.cd)
+		if(item.cd)
 			$scope.price += 5;
 	}
 

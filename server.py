@@ -4,8 +4,7 @@ import SocketServer
 import BaseHTTPServer
 import SimpleHTTPServer
 
-class ThreadingSimpleServer(SocketServer.ThreadingMixIn,
-                   BaseHTTPServer.HTTPServer):
+class ThreadingSimpleServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer):
     pass
 
 import sys
