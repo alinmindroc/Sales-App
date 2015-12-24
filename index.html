@@ -15,22 +15,27 @@
 	<link href="style.css" rel="stylesheet">
 </head>
 <body ng-controller="salesController">
+	<script type="text/ng-template" id="myPopoverTemplate.html">
+		<div>{{dynamicPopover.content}}</div>
+		<div class="btn-group" ng-click="$event.stopPropagation()">
+			<label class="btn btn-primary" ng-model="p.magazine" uib-btn-checkbox>Ziar</label>
+			<label class="btn btn-primary" ng-model="p.book" uib-btn-checkbox>Carte</label>
+			<label class="btn btn-primary" ng-model="p.cd" uib-btn-checkbox>CD</label>
+		</div>
+	</script>
+
 	<script type="text/ng-template" id="myModalContent.html">
 		<div class="modal-header">
 			<h3 class="modal-title">Selectare add-on</h3>
 		</div>
 		<div class="modal-body">
-			<ul>
-				<li>
-					<input type="checkbox">ziar</input>
-				</li>
-				<li>
-					<input type="checkbox">carte</input>
-				</li>
-				<li>
-					<input type="checkbox">cd</input>
-				</li>
-			</ul>
+
+			<input type="checkbox">ziar</input>
+
+			<input type="checkbox">carte</input>
+
+			<input type="checkbox">cd</input>
+
 			Selected: <b>{{ selected.item }}</b>
 		</div>
 		<div class="modal-footer">
@@ -47,11 +52,22 @@
 			</thead>
 		</table>
 	</div>
+
 	<div ng-show="shownPublications.length > 0" style="height: 85vh; overflow: auto">
 		<table class="table table-condensed">
-			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; open()" ng-class="p.selected?'selected success':''">
-				<td style="width: 50%">{{p.name}}</td>
-				<td style="width: 50%; color: #9B9B9B">{{p.genre}}</td>
+			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected" ng-class="p.selected?'selected success':''">
+				<td style="width: 50%">
+					{{p.name}}
+					<div style="float: right" ng-show="p.selected">
+						<img ng-show="p.selected && p.magazine" style="width: 18px" src="images/ziar.png">
+						<img ng-show="p.selected && p.book" style="width: 16px" src="images/book.png">
+						<img ng-show="p.selected && p.cd" style="width: 18px" src="images/CD.png">
+						<button ng-click="$event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-option-horizontal"></span></button>
+					</div>
+				</td>
+				<td style="width: 50%; color: #9B9B9B">
+					{{p.genre}}
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -63,7 +79,6 @@
 			<input type="text" class="form-control" placeholder="Cautare" ng-model="searchText" ng-change="filter(searchText)">
 			<i class="glyphicon glyphicon-search form-control-feedback"></i>
 		</div>
-
 	</div>
 </body>
 </html>
