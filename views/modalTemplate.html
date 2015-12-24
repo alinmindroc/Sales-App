@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
 	<table class="table">
-		<tr ng-repeat="p in items" ng-click="p.selected=!p.selected; p.magazine = true" ng-class="p.selected?'selected success':''">
+		<tr ng-repeat="p in items" ng-class="p.selected?'selected success':''">
 			<td style="width: 50%">
 				{{p.name}}
 				<div style="margin-top: 5px; float: right" ng-show="p.selected">
