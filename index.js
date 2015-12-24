@@ -118,7 +118,7 @@ angular.module('salesApp', [])
 			var genre = x.genre.toLowerCase();
 			var term = text.toLowerCase();
 			return name.indexOf(term) != -1 || genre.indexOf(term) != -1;
-		})
+		});
 	}
 
 	$scope.sortAscending = true;
@@ -128,7 +128,7 @@ angular.module('salesApp', [])
 
 		$scope.sortedColumn = column;
 
-		$scope.publications.sort(function(a, b){
+		$scope.shownPublications.sort(function(a, b){
 			switch(column){
 				case 'name':
 				if($scope.sortAscending)
