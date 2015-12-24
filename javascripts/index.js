@@ -55,51 +55,50 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 
 	$scope.openedPopover = false;
 
-	$scope.items = ['item1', 'item2', 'item3'];
-
-	$scope.animationsEnabled = true;
-
-	$scope.open = function (size) {
-
+	$scope.open = function () {
 		var modalInstance = $uibModal.open({
-			animation: $scope.animationsEnabled,
-			templateUrl: 'myModalContent.html',
+			templateUrl: 'modalTemplate.html',
 			controller: 'ModalInstanceCtrl',
-			size: size,
 			resolve: {
 				items: function () {
-					return $scope.items;
+					return $scope.publications.filter(function(p){
+						return p.selected == true;
+					});
 				}
 			}
 		});
 
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-		}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
+		modalInstance.result.then(function (items) {
+			for(i in $scope.publications){
+				$scope.publications[i].selected = false;
+				$scope.publications[i].magazine = false;
+				$scope.publications[i].book = false;
+				$scope.publications[i].cd = false;
+			}
+			$scope.selectedPub = $scope.publications[0];
+			$scope.shownPublications = $scope.publications;
 		});
 	};
 
-	$scope.toggleAnimation = function () {
-		$scope.animationsEnabled = !$scope.animationsEnabled;
-	};
-
-
 	$scope.dynamicPopover = {
-		templateUrl: 'myPopoverTemplate.html',
+		templateUrl: 'popoverTemplate.html',
 	};
-
-
 }])
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-
 	$scope.items = items;
-	$scope.selected = {
-		item: $scope.items[0]
-	};
+	$scope.price = 0;
+	for(i in $scope.items){
+		item = $scope.items[i];
+		if(item.magazine)
+			$scope.price += 5;
+		else if(item.book)
+			$scope.price += 10;
+		else if(item.cd)
+			$scope.price += 5;
+	}
 
 	$scope.ok = function () {
-		$uibModalInstance.close($scope.selected.item);
+		$uibModalInstance.close($scope.items);
 	};
 
 	$scope.cancel = function () {

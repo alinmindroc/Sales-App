@@ -15,7 +15,7 @@
 	<link href="style.css" rel="stylesheet">
 </head>
 <body ng-controller="salesController">
-	<script type="text/ng-template" id="myPopoverTemplate.html">
+	<script type="text/ng-template" id="popoverTemplate.html">
 		<div>{{dynamicPopover.content}}</div>
 		<div class="btn-group" ng-click="$event.stopPropagation()">
 			<label class="btn btn-primary" ng-model="p.magazine" uib-btn-checkbox>Ziar</label>
@@ -24,23 +24,28 @@
 		</div>
 	</script>
 
-	<script type="text/ng-template" id="myModalContent.html">
+	<script type="text/ng-template" id="modalTemplate.html">
 		<div class="modal-header">
-			<h3 class="modal-title">Selectare add-on</h3>
+			<h3 class="modal-title">Finalizare ordin</h3>
 		</div>
 		<div class="modal-body">
-
-			<input type="checkbox">ziar</input>
-
-			<input type="checkbox">carte</input>
-
-			<input type="checkbox">cd</input>
-
-			Selected: <b>{{ selected.item }}</b>
+			<table class="table">
+				<tr ng-repeat="p in items" ng-click="p.selected=!p.selected; p.magazine = true" ng-class="p.selected?'selected success':''">
+					<td style="width: 50%">
+						{{p.name}}
+						<div style="margin-top: 5px; float: right" ng-show="p.selected">
+							<img ng-show="p.selected && p.magazine" style="width: 18px; opacity: 0.5" src="images/ziar.png">
+							<img ng-show="p.selected && p.book" style="width: 16px; opacity: 0.5" src="images/book.png">
+							<img ng-show="p.selected && p.cd" style="width: 18px; opacity: 0.5" src="images/CD.png">
+						</div>
+					</td>
+				</tr>
+			</table>
+			<h3>Total: {{price}} lei</h3>
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-			<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+			<button class="btn btn-warning" type="button" ng-click="cancel()">Inapoi</button>
 		</div>
 	</script>
 
@@ -55,20 +60,32 @@
 
 	<div ng-show="shownPublications.length > 0" style="height: 85vh; overflow: auto">
 		<table class="table">
-			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected" ng-class="p.selected?'selected success':''">
+			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; p.magazine = true" ng-class="p.selected?'selected success':''">
 				<td style="width: 50%">
 					{{p.name}}
-					<div style="float: right" ng-show="p.selected">
-						<img ng-show="p.selected && p.magazine" style="width: 18px" src="images/ziar.png">
-						<img ng-show="p.selected && p.book" style="width: 16px" src="images/book.png">
-						<img ng-show="p.selected && p.cd" style="width: 18px" src="images/CD.png">
-						<button ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{p.name}}" type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' "></span>
-						</button>
+					<div style="margin-top: 5px" ng-show="p.selected">
+						<img ng-show="p.selected && p.magazine" style="width: 18px; opacity: 0.5" src="images/ziar.png">
+						<img ng-show="p.selected && p.book" style="width: 16px; opacity: 0.5" src="images/book.png">
+						<img ng-show="p.selected && p.cd" style="width: 18px; opacity: 0.5" src="images/CD.png">
 					</div>
 				</td>
 				<td style="width: 50%; color: #9B9B9B">
-					{{p.genre}}
+					<div style="float: left; width: 90%">
+						<div>
+							{{p.genre}}
+						</div>
+						<div style="margin-top: 10px" ng-show="p.selected">
+							<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
+								<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' ">
+								</span>
+							</button>
+						</div>
+					</div>
+					<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
+					style="float: right; width: 10%; height: 70px; position: relative">
+					<div style="position: absolute; bottom: 0; right: 0">
+						<span style="font-size: 30px; color: green" class="glyphicon glyphicon-chevron-right"></span></div>
+					</div>
 				</td>
 			</tr>
 		</table>
