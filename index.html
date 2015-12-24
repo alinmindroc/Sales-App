@@ -11,7 +11,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
 	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
 
-	<script src="index.js"></script>
+	<script src="javascripts/index.js"></script>
 	<link href="style.css" rel="stylesheet">
 </head>
 <body ng-controller="salesController">
@@ -54,7 +54,7 @@
 	</div>
 
 	<div ng-show="shownPublications.length > 0" style="height: 85vh; overflow: auto">
-		<table class="table table-condensed">
+		<table class="table">
 			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected" ng-class="p.selected?'selected success':''">
 				<td style="width: 50%">
 					{{p.name}}
@@ -62,7 +62,9 @@
 						<img ng-show="p.selected && p.magazine" style="width: 18px" src="images/ziar.png">
 						<img ng-show="p.selected && p.book" style="width: 16px" src="images/book.png">
 						<img ng-show="p.selected && p.cd" style="width: 18px" src="images/CD.png">
-						<button ng-click="$event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-option-horizontal"></span></button>
+						<button ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="{{p.name}}" type="button" class="btn btn-default btn-sm">
+						<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' "></span>
+						</button>
 					</div>
 				</td>
 				<td style="width: 50%; color: #9B9B9B">
