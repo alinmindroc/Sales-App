@@ -27,17 +27,25 @@
     margin-left: 5px;
 }
 
-#magazineImg {
+#magazineName {
+    font-size: 14px;
+}
+
+#genreName {
+    font-size: 12px;
+}
+
+#imgMagazine {
     width: 18px;
     opacity: 0.5;
 }
 
-#bookImg {
+#imgBook {
     width: 16px;
     opacity: 0.5;
 }
 
-#cdImg {
+#imgCd {
     width: 18px;
     opacity: 0.5;
 }

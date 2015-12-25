@@ -34,17 +34,18 @@
 			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; p.magazine = true"
 			ng-class="p.selected?'selected success':''">
 			<td class="halfWidth">
-				{{p.name}}
+				<span id="magazineName">{{p.name}}</span>
 				<div id="addonsContainer" ng-show="p.selected">
-					<img id="magazineImg" ng-show="p.selected && p.magazine" src="images/ziar.png">
-					<img id="bookImg" ng-show="p.selected && p.book" src="images/book.png">
-					<img id="cdImg" ng-show="p.selected && p.cd" src="images/CD.png">
+					<img id="imgMagazine" ng-show="p.magazine" src="images/ziar.png">
+					<img id="imgBook" ng-show="p.book" src="images/book.png">
+					<img id="imgCd" ng-show="p.cd" src="images/CD.png">
+					<span class="text-success">{{getItemTotal(p)}} lei</span>
 				</div>
 			</td>
 			<td class="text-muted">
 				<div id="leftChildRightTd">
 					<div>
-						{{p.genre}}
+						<span id="genreName">{{p.genre}}</span>
 					</div>
 					<div id="rightChildRightTd" ng-show="p.selected">
 						<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">

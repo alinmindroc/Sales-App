@@ -14,7 +14,7 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 			return "glyphicon glyphicon-sort-by-alphabet";
 		else
 			return "glyphicon glyphicon-sort-by-alphabet-alt";
-	}
+	};
 
 	$scope.filter = function(text){
 		$scope.shownPublications = $scope.publications.filter(function(x){
@@ -23,7 +23,7 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 			var term = text.toLowerCase();
 			return name.indexOf(term) != -1 || genre.indexOf(term) != -1;
 		});
-	}
+	};
 
 	$scope.sortAscending = true;
 	$scope.sortBy = function(column){
@@ -51,13 +51,25 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 					return b.sales - a.sales;
 			}
 		})
+	};
+
+	$scope.getItemTotal = function(item){
+		var price = 0;
+		if(item.magazine)
+			price += 5;
+		if(item.book)
+			price += 10;
+		if(item.cd)
+			price += 5;
+
+		return price;
 	}
 
 	$scope.openedPopover = false;
 
 	$scope.open = function () {
 		var modalInstance = $uibModal.open({
-			templateUrl: 'views/modalTemplate.html',
+			templateUrl: 'views/finalizeOrderModal.html',
 			controller: 'ModalInstanceCtrl',
 			resolve: {
 				items: function () {
@@ -81,7 +93,7 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 	};
 
 	$scope.dynamicPopover = {
-		templateUrl: 'views/popoverTemplate.html',
+		templateUrl: 'views/addOnDetailsPopover.html',
 	};
 }])
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
@@ -95,6 +107,18 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 			$scope.price += 10;
 		if(item.cd)
 			$scope.price += 5;
+	};
+
+	$scope.getItemTotal = function(item){
+		var price = 0;
+		if(item.magazine)
+			price += 5;
+		if(item.book)
+			price += 10;
+		if(item.cd)
+			price += 5;
+
+		return price;
 	}
 
 	$scope.ok = function () {

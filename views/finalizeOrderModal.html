@@ -5,11 +5,15 @@
 	<table class="table">
 		<tr ng-repeat="p in items" ng-class="p.selected?'selected success':''">
 			<td style="width: 50%">
-				{{p.name}}
-				<div style="margin-top: 5px; float: right" ng-show="p.selected">
-					<img ng-show="p.selected && p.magazine" style="width: 18px; opacity: 0.5" src="images/ziar.png">
-					<img ng-show="p.selected && p.book" style="width: 16px; opacity: 0.5" src="images/book.png">
-					<img ng-show="p.selected && p.cd" style="width: 18px; opacity: 0.5" src="images/CD.png">
+				<div class="pull-left">
+					{{p.name}}
+					<br>
+					<span class="text-success">{{getItemTotal(p)}} lei</span>
+				</div>
+				<div class="pull-right" ng-show="p.selected">
+					<img ng-show="p.magazine" style="width: 18px; opacity: 0.5" src="images/ziar.png">
+					<img ng-show="p.book" style="width: 16px; opacity: 0.5" src="images/book.png">
+					<img ng-show="p.cd" style="width: 18px; opacity: 0.5" src="images/CD.png">
 				</div>
 			</td>
 		</tr>
