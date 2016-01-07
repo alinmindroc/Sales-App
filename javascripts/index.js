@@ -5,11 +5,29 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 		$scope.publications = res.data;
 		$scope.selectedPub = $scope.publications[0];
 		$scope.shownPublications = $scope.publications;
+		$scope.shownPublications.sort(function(a, b){
+			if($scope.sortAscending)
+				return a.name.localeCompare(b.name);
+			else
+				return b.name.localeCompare(a.name);						
+		}
+		);
+
+		$scope.categories = [
+		'Toate',
+		'Economic&financiar',
+		'Divertisment, Integrame, Rebus si Jocuri',
+		'Cotidian generalist national',
+		'Culinar',
+		'Home&Deco',
+		'Femei',
+		'Femei (Lifestyle / moda)',
+		'Femei (Glossy)',
+		'Cotidian generalist, local sau regional'
+		];
 	});
 
 	$scope.sortStyle = function(column){
-		if($scope.sortedColumn != column)
-			return "";
 		if($scope.sortAscending == true)
 			return "glyphicon glyphicon-sort-by-alphabet";
 		else
@@ -26,31 +44,30 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 	};
 
 	$scope.sortAscending = true;
-	$scope.sortBy = function(column){
-		if($scope.sortedColumn == column)
-			$scope.sortAscending =! $scope.sortAscending;
 
-		$scope.sortedColumn = column;
+	$scope.sortByName = function(){
+		$scope.sortAscending =! $scope.sortAscending;
 
 		$scope.shownPublications.sort(function(a, b){
-			switch(column){
-				case 'name':
-				if($scope.sortAscending)
-					return a.name.localeCompare(b.name);
-				else
-					return b.name.localeCompare(a.name);						
-				case 'genre':
-				if($scope.sortAscending)				
-					return a.genre.localeCompare(b.genre);
-				else
-					return b.genre.localeCompare(a.genre);
-				case 'sales':
-				if($scope.sortAscending)			
-					return a.sales - b.sales;
-				else
-					return b.sales - a.sales;
-			}
-		})
+			if($scope.sortAscending)
+				return a.name.localeCompare(b.name);
+			else
+				return b.name.localeCompare(a.name);						
+		}
+		)
+	};
+
+	$scope.selectCategory = function(category){
+		$scope.openedCategoryPopover = false;
+
+		if(category == 'toate'){
+			$scope.shownPublications = $scope.publications;
+			return;
+		}
+
+		$scope.shownPublications = $scope.publications.filter(function(x){
+			return x.genre == category;
+		});
 	};
 
 	$scope.getItemTotal = function(item){
@@ -92,9 +109,8 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 		});
 	};
 
-	$scope.dynamicPopover = {
-		templateUrl: 'views/addOnDetailsPopover.html',
-	};
+	$scope.addOnTemplate = 'views/addOnDetailsPopover.html';
+	$scope.selectCategoryTemplate = 'views/selectCategoryPopover.html';
 }])
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
 	$scope.items = items;

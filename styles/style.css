@@ -131,3 +131,7 @@
     bottom: 0;
     width: 100%;
 }
+
+.popover-content {
+    padding: 0px !important;
+}

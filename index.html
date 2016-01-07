@@ -17,13 +17,13 @@
 	<div id="header">
 		<table class="table">
 			<thead>
-				<th class="info halfWidth" ng-click="sortBy('name')">
+				<th class="info halfWidth" ng-click="sortByName()">
 					<a href="">Nume</a>
 					<span id="sortButton1" ng-class="sortStyle('name')"></span>
 				</th>
-				<th class="info halfWidth" ng-click="sortBy('genre')">
-					<a href="">Categorie</a>
-					<span id="sortButton2" ng-class="sortStyle('genre')"></span>
+				<th class="info halfWidth">
+				<a href="" popover-placement="bottom" uib-popover-template="selectCategoryTemplate"
+					popover-title="Selectare categorie" popover-is-open="openedCategoryPopover">Categorie</a>
 				</th>
 			</thead>
 		</table>
@@ -48,20 +48,22 @@
 						<span id="genreName">{{p.genre}}</span>
 					</div>
 					<div id="rightChildRightTd" ng-show="p.selected">
-						<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()" popover-placement="bottom" uib-popover-template="dynamicPopover.templateUrl" popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
-							<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' ">
-							</span>
-						</button>
-					</div>
+						<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()"
+						popover-placement="bottom" uib-popover-template="addOnTemplate"
+						popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
+						<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' ">
+						</span>
+					</button>
 				</div>
-				<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
-				id="openModalParent">
-				<div id="openModalChild">
-					<span id="finalizeOrder" class="text-success glyphicon glyphicon-chevron-right"></span></div>
-				</div>
-			</td>
-		</tr>
-	</table>
+			</div>
+			<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
+			id="openModalParent">
+			<div id="openModalChild">
+				<span id="finalizeOrder" class="text-success glyphicon glyphicon-chevron-right"></span></div>
+			</div>
+		</td>
+	</tr>
+</table>
 </div>
 
 <div id="noResultsWarningContainer" ng-show="shownPublications == 0">

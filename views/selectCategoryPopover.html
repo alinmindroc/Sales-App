@@ -1,0 +1,8 @@
+<div>{{dynamicPopover.content}}</div>
+<div ng-click="$event.stopPropagation()" style="margin-bottom: -20px">
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="cat in categories" ng-click="selectCategory(cat)">
+			{{cat}}
+		</li>
+	</ul>
+</div>
