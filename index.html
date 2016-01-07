@@ -68,9 +68,11 @@
 	<div id="noResultsWarning">0 rezultate gasite pentru "{{searchText}}"</div>
 </div>
 
-<div class="form-group form-group-lg has-info has-feedback">
-	<input type="text" class="form-control" placeholder="Cautare" ng-model="searchText" ng-change="filter(searchText)">
-	<i class="glyphicon glyphicon-search form-control-feedback"></i>
+<div id="footer">
+	<div class="form-group form-group-lg has-info has-feedback">
+		<input type="text" class="form-control" style="font-size: 24px" placeholder="Cautare" ng-model="searchText" ng-change="filter(searchText)">
+		<i class="glyphicon glyphicon-search form-control-feedback"></i>
+	</div>
 </div>
 </body>
 </html>
