@@ -60,7 +60,7 @@ angular.module('salesApp', ['ngAnimate', 'ui.bootstrap'])
 	$scope.selectCategory = function(category){
 		$scope.openedCategoryPopover = false;
 
-		if(category == 'toate'){
+		if(category == 'Toate'){
 			$scope.shownPublications = $scope.publications;
 			return;
 		}
