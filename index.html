@@ -18,51 +18,56 @@
 		<table class="table">
 			<thead>
 				<th class="info halfWidth" ng-click="sortByName()">
-					<a href="">Nume</a>
-					<span id="sortButton1" ng-class="sortStyle('name')"></span>
+					<a href="">
+						Nume
+						<span ng-class="sortStyle('name')"></span>
+					</a>
 				</th>
 				<th class="info halfWidth">
-				<a href="" popover-placement="bottom" uib-popover-template="selectCategoryTemplate"
-					popover-title="Selectare categorie" popover-is-open="openedCategoryPopover">Categorie</a>
-				</th>
-			</thead>
-		</table>
-	</div>
+					<a href="" popover-placement="bottom" uib-popover-template="selectCategoryTemplate"
+					popover-title="Selectare categorie" popover-is-open="openedCategoryPopover">
+					Categorie
+					<span class="glyphicon" ng-class="openedCategoryPopover ? 'glyphicon-menu-up' : 'glyphicon-menu-down'"></span>
+				</a>
+			</th>
+		</thead>
+	</table>
+</div>
 
-	<div id="body" ng-show="shownPublications.length > 0">
-		<table class="table">
-			<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; p.magazine = true"
-			ng-class="p.selected?'selected success':''">
-			<td class="halfWidth">
-				<span id="magazineName">{{p.name}}</span>
-				<div id="addonsContainer" ng-show="p.selected">
-					<img id="imgMagazine" ng-show="p.magazine" src="images/ziar.png">
-					<img id="imgBook" ng-show="p.book" src="images/book.png">
-					<img id="imgCd" ng-show="p.cd" src="images/CD.png">
-					<span class="text-success">{{getItemTotal(p)}} lei</span>
-				</div>
-			</td>
-			<td class="text-muted">
-				<div id="leftChildRightTd">
-					<div>
-						<span id="genreName">{{p.genre}}</span>
-					</div>
-					<div id="rightChildRightTd" ng-show="p.selected">
-						<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()"
-						popover-placement="bottom" uib-popover-template="addOnTemplate"
-						popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
-						<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal' ">
-						</span>
-					</button>
-				</div>
-			</div>
-			<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
-			id="openModalParent">
-			<div id="openModalChild">
-				<span id="finalizeOrder" class="text-success glyphicon glyphicon-chevron-right"></span></div>
+<div id="body" ng-show="shownPublications.length > 0">
+	<table class="table">
+		<tr ng-repeat="p in shownPublications" ng-click="p.selected=!p.selected; p.magazine = true"
+		ng-class="p.selected?'selected success':''">
+		<td class="halfWidth">
+			<span id="magazineName">{{p.name}}</span>
+			<div id="addonsContainer" ng-show="p.selected">
+				<img id="imgMagazine" ng-show="p.magazine" src="images/ziar.png">
+				<img id="imgBook" ng-show="p.book" src="images/book.png">
+				<img id="imgCd" ng-show="p.cd" src="images/CD.png">
+				<span class="text-success">{{getItemTotal(p)}} lei</span>
 			</div>
 		</td>
-	</tr>
+		<td class="text-muted">
+			<div id="leftChildRightTd">
+				<div>
+					<span id="genreName">{{p.genre}}</span>
+				</div>
+				<div id="rightChildRightTd" ng-show="p.selected">
+					<button ng-show="p.selected" ng-click="openedPopover =! openedPopover; $event.stopPropagation()"
+					popover-placement="bottom" uib-popover-template="addOnTemplate"
+					popover-title="Selectare add-on" type="button" class="btn btn-default btn-sm">
+					<span class="glyphicon" ng-class="openedPopover ? 'glyphicon-ok' : 'glyphicon-option-horizontal'">
+					</span>
+				</button>
+			</div>
+		</div>
+		<div ng-click="open(); $event.stopPropagation()" ng-show="p.selected"
+		id="openModalParent">
+		<div id="openModalChild">
+			<span id="finalizeOrder" class="text-success glyphicon glyphicon-chevron-right"></span></div>
+		</div>
+	</td>
+</tr>
 </table>
 </div>
 
